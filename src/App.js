@@ -1,37 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
 import logo from './logo.svg';
 import './App.css';
 import data from './data.json';
 import CatList from './CatList';
 import CatSelection from './CatSelection';
 
-console.log('data : ', data);
-
 class App extends Component {
 
-  constructor(props) {
-    super(props);
 
-    const smartCats = data.cats.map( item => {
-      return { ...item, selected: false};
-    });
-
-    console.log('smartCats : ', smartCats);
-
-    this.state = {
-      cats: smartCats
-    };
-
-
+  state = {
+    cats: data.cats.map( item => ({ ...item, selected: false}))
   }
 
-  selectCat(cat) {
-
-
-    console.log('cat : ', this.state.cats);
+  selectCat = (cat) => {
 
     const newCats = this.state.cats.map( item => {
-
 
       if(item.id === cat.id) {
         item.selected = !item.selected ;
@@ -58,7 +41,7 @@ class App extends Component {
         </p>
         <div>
           <CatSelection cats={this.state.cats}/>
-          <CatList cats={this.state.cats} selectCat={this.selectCat.bind(this)}/>
+          <CatList cats={this.state.cats} selectCat={this.selectCat}/>
         </div>
       </div>
     );
